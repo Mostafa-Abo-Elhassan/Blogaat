@@ -1,0 +1,64 @@
+﻿@model List<Blogaat.Models.Domains.Tag>
+
+@{
+    ViewData["Title"] = "GetALL Tag";
+}
+
+<div>
+
+    <h3 style="font-size:30px;">SHOW ALL TAGS</h3>
+</div>
+<div>
+    @if (Model != null && Model.Any())
+    {
+        <div class="container py-5">
+
+            <table class="table">
+                <thad>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Display Name</th>
+                        <th>Photo</th>
+                        <th>Editing </th>
+                    </tr>
+                </thad>
+                <tbody>
+                    @foreach (var tag in Model)
+                    {
+                        <tr>
+                            <td>@tag.Id</td>
+                            <td>@tag.Name</td>
+                            <td>@tag.DisplayName</td>
+                          @*   <th><img src="~/Images/@tag.urlimage" /> </th> *@
+                            <td>
+                                <button type="submit" class="btn btn-dark"
+                                        asp-area="" asp-controller="AdminTags"
+                                        asp-action="Edit" asp-route-id="@tag.Id">
+                                    <a asp-area="" asp-controller="AdminTags"
+                                       asp-action="Edit" asp-route-id="@tag.Id">
+                                        Edit
+                                    </a>
+                                </button>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    }
+    else
+    {
+        <p>NO Tags Found!</p>
+    }
+    @* <style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    </style> *@
+
+</div>

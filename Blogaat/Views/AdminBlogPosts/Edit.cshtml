@@ -1,0 +1,306 @@
+﻿@* @model Blogaat.Models.ViewModels.EditBlogPostVM
+@{
+    ViewData["Title"] = "Edit Blog Post";
+}
+<div>
+
+    <h3 style="font-size:30px;">Edit Blog Post</h3>
+</div>
+<div class="container py-2">
+    <div class="mb-3">
+        <button type="button" class="btn btn-dark">
+            <a asp-controller="AdminBlogPosts" asp-action="GetALL">Back</a>
+        </button>
+    </div>
+</div>
+<link href="~/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/js/froala_editor.pkgd.min.js"></script>
+@if (Model != null)
+{
+    <div class="container py-5">
+
+        <form method="post" enctype="multipart/form-data" asp-controller="AdminBlogPosts" asp-action="SaveEditblog">
+
+            <div class="mb-3">
+                <label for="ID" class="form-label">ID</label><br>
+                <input class="form-control" type="text" id="ID" asp-for="Id" readonly><br>
+
+            </div>
+            <div class="mb-3">
+                <label for="Heading" class="form-label">Heading</label><br>
+                <input class="form-control" type="text" id="Heading" asp-for="Heading"><br>
+                <span asp-validation-for="Heading" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="PageTitle" class="form-label">Page Title</label><br>
+                <input class="form-control" type="text" id="PageTitle" asp-for="PageTitle"><br>
+                <span asp-validation-for="PageTitle" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label><br>
+                <textarea class="form-control" id="content" asp-for="Content"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="ShortDescription" class="form-label">Short Description</label><br>
+                <input class="form-control" type="text" id="ShortDescription" asp-for="ShortDescription"><br>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="FeateredImageupload" class="form-label">Upload Image</label>
+                <input class="form-control" type="file" id="FeateredImageupload" name="file" accept="image/*">
+
+
+                @if (Model.FeateredImageUrl != null)
+                {
+                    <img src="@Model.FeateredImageUrl" id="Display" style="display:none; width:200px;" />
+                }
+                else
+                {
+                    <img src="" id="Display" style="display:none; width:200px;" />
+                }
+            </div>
+
+            <div class="mb-3">
+                <label for="FeateredImageUrl" class="form-label">Featered Image Url</label><br>
+                <input class="form-control" type="text" id="FeateredImageUrl" asp-for="FeateredImageUrl"><br>
+                <span asp-validation-for="FeateredImageUrl" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="UrlHandle" class="form-label">Url Handle</label><br>
+                <input class="form-control" type="text" id="UrlHandle" asp-for="UrlHandle"><br>
+                <span asp-validation-for="UrlHandle" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="PublishedDate" class="form-label">Published Date</label><br>
+                <input class="form-control" type="date" id="PublishedDate" asp-for="PublishedDate"><br>
+                <span asp-validation-for="PublishedDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Author" class="form-label">Author</label><br>
+                <input class="form-control" type="text" id="Author" asp-for="Author"><br>
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="Visible" asp-for="Visible">
+                <label for="Visible" class="form-check-label">
+                    Is Visible ?
+                </label>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tags</label>
+                <select class="form-select"
+                        asp-items="@Model.Tags"
+                        asp-for="SelectedTags"></select>
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-dark">Update</button>
+                    <button type="submit" class="btn btn-danger m-2"
+                            asp-area="" asp-action="Delete"
+                            asp-controller="AdminBlogPosts">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <p>This Blog post is not found</p>
+}
+<!-- Scripts -->
+@section Scripts {
+    <script>
+        // Initialize Froala Editor
+        var editor = new FroalaEditor('#content');
+
+        // Image Preview and Upload Script
+        document.getElementById("FeateredImageupload").addEventListener("change", function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('Display');
+                output.src = reader.result;
+                output.style.display = "block";
+            };
+            reader.readAsDataURL(event.target.files[0]);
+
+            // Create FormData to upload image
+            var formData = new FormData();
+            formData.append("file", event.target.files[0]);
+
+            // Upload image to server via AJAX
+            fetch('/api/ImageUpload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Set the Cloudinary image URL to the FeateredImageUrl input
+                    document.getElementById("FeateredImageUrl").value = data.link;
+                })
+                .catch(error => {
+                    console.error("Error uploading image:", error);
+                });
+        });
+    </script>
+}
+
+ *@
+ @model Blogaat.Models.ViewModels.EditBlogPostVM
+@{
+    ViewData["Title"] = "Edit Blog Post";
+}
+<div>
+    <h3 style="font-size:30px;">Edit Blog Post</h3>
+</div>
+<div class="container py-2">
+    <div class="mb-3">
+        <button type="button" class="btn btn-dark">
+            <a asp-controller="AdminBlogPosts" asp-action="GetALL">Back</a>
+        </button>
+    </div>
+</div>
+
+<!-- تحميل CSS و JavaScript لـ Froala Editor -->
+<link href="~/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/js/froala_editor.pkgd.min.js"></script>
+
+@if (Model != null)
+{
+    <div class="container py-5">
+        <form method="post" enctype="multipart/form-data" asp-controller="AdminBlogPosts" asp-action="SaveEditblog">
+            <!-- حقول النموذج -->
+            <div class="mb-3">
+                <label for="ID" class="form-label">ID</label><br>
+                <input class="form-control" type="text" id="ID" asp-for="Id" readonly><br>
+            </div>
+
+            <div class="mb-3">
+                <label for="Heading" class="form-label">Heading</label><br>
+                <input class="form-control" type="text" id="Heading" asp-for="Heading"><br>
+                <span asp-validation-for="Heading" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="PageTitle" class="form-label">Page Title</label><br>
+                <input class="form-control" type="text" id="PageTitle" asp-for="PageTitle"><br>
+                <span asp-validation-for="PageTitle" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label><br>
+                <textarea class="form-control" id="content" asp-for="Content"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="ShortDescription" class="form-label">Short Description</label><br>
+                <input class="form-control" type="text" id="ShortDescription" asp-for="ShortDescription"><br>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="FeateredImageupload" class="form-label">Upload Image</label>
+                <input class="form-control" type="file" id="FeateredImageupload" name="file" accept="image/*">
+
+                <!-- عرض الصورة بناءً على URL -->
+                @if (Model.FeateredImageUrl != null)
+                {
+                    <img src="@Model.FeateredImageUrl" id="Display" style="display:block; width:200px;" />
+                }
+                else
+                {
+                    <img src="" id="Display" style="display:none; width:200px;" />
+                }
+            </div>
+
+            <div class="mb-3">
+                <label for="FeateredImageUrl" class="form-label">Featered Image Url</label><br>
+                <input class="form-control" type="text" id="FeateredImageUrl" asp-for="FeateredImageUrl"><br>
+                <span asp-validation-for="FeateredImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="UrlHandle" class="form-label">Url Handle</label><br>
+                <input class="form-control" type="text" id="UrlHandle" asp-for="UrlHandle"><br>
+                <span asp-validation-for="UrlHandle" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="PublishedDate" class="form-label">Published Date</label><br>
+                <input class="form-control" type="date" id="PublishedDate" asp-for="PublishedDate"><br>
+                <span asp-validation-for="PublishedDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Author" class="form-label">Author</label><br>
+                <input class="form-control" type="text" id="Author" asp-for="Author"><br>
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="Visible" asp-for="Visible">
+                <label for="Visible" class="form-check-label">Is Visible ?</label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tags</label>
+                <select class="form-select" asp-items="@Model.Tags" asp-for="SelectedTags"></select>
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-dark">Update</button>
+                    <button type="submit" class="btn btn-danger m-2" asp-area="" asp-action="Delete" asp-controller="AdminBlogPosts">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <p>This Blog post is not found</p>
+}
+
+<!-- Scripts -->
+@section Scripts {
+    <script>
+        // Initialize Froala Editor
+        var editor = new FroalaEditor('#content', {
+            imageUploadURL:'/api/ImageUpload'
+        });
+
+
+        // Image Preview and Upload Script
+        document.getElementById("FeateredImageupload").addEventListener("change", function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('Display');
+                output.src = reader.result;
+                output.style.display = "block";
+            };
+            reader.readAsDataURL(event.target.files[0]);
+
+            // Create FormData to upload image
+            var formData = new FormData();
+            formData.append("file", event.target.files[0]);
+
+            // Upload image to server via AJAX
+            fetch('/api/ImageUpload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Set the Cloudinary image URL to the FeateredImageUrl input
+                    document.getElementById("FeateredImageUrl").value = data.link;
+                    // Display the uploaded image
+                    document.getElementById('Display').src = data.link;
+                })
+                .catch(error => {
+                    console.error("Error uploading image:", error);
+                });
+        });
+    </script>
+}

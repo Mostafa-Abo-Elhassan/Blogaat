@@ -1,0 +1,27 @@
+﻿@model Blogaat.Models.ViewModels.AddTagVM
+
+@{
+    ViewData["Title"] = "Add Tag";
+}
+<div class="container py-5">
+
+    <form method="post" asp-controller="AdminTags" asp-action="SaveAdd">
+
+        <div class="mb-3">
+            <label class="form-label" for="name">Name:</label><br>
+            <input class="form-control" type="text" id="name" asp-for="Name"><br>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="display name">Display Name:</label><br>
+            <input class="form-control" type="text" id="display name" asp-for="DisplayName"><br><br>
+            <span asp-validation-for="DisplayName" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">submit</button>
+        </div>
+    </form>
+</div>

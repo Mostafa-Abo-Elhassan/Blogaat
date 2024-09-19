@@ -1,0 +1,65 @@
+﻿ @model Blogaat.Models.ViewModels.EditTagVM
+
+@{
+    ViewData["Title"] = "Edit Tag";
+}
+<div>
+
+    <h3 style="font-size:30px;">Edit Tag</h3>
+</div>
+<div class="container py-5">
+    <div class="mb-3">
+        <button type="button" class="btn btn-dark">
+            <a asp-controller="AdminTags" asp-action="GetALL">Back</a>
+        </button>
+    </div>
+</div>
+<div>
+
+    @if (Model != null)
+    {
+        <div class="container py-5">
+
+            <form method="post" asp-controller="AdminTags" asp-action="SaveEdit">
+
+                <div class="mb-3">
+                    <label class="form-label" for="id">id:</label><br>
+                    <input class="form-control" type="text" id="id" class="form-control" asp-for="Id" readonly><br>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name:</label><br>
+                    <input class="form-control" type="text" id="name" required asp-for="Name" class="form-control">
+                    <br>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="display name">Display Name:</label><br>
+                    <input class="form-control" type="text" id="display name" required asp-for="DisplayName" class="form-control">
+                    <span asp-validation-for="DisplayName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-dark">Update</button>
+                        <button type="submit" class="btn btn-danger m-2"
+                                asp-area="" asp-action="Deletee"
+                                asp-controller="AdminTags">
+                            Delete
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    }
+    else
+    {
+        <p>This Tag is not found</p>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
