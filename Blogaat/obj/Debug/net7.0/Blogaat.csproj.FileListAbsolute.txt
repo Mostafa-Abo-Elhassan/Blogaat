@@ -81,3 +81,4 @@ C:\Users\workstation\source\repos\Blogaat\Blogaat\bin\Debug\net7.0\Microsoft.Ext
 C:\Users\workstation\source\repos\Blogaat\Blogaat\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\Users\workstation\source\repos\Blogaat\Blogaat\bin\Debug\net7.0\CloudinaryDotNet.dll
 C:\Users\workstation\source\repos\Blogaat\Blogaat\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\workstation\source\repos\Blogaat\Blogaat\obj\Debug\net7.0\Blogaat.sourcelink.json

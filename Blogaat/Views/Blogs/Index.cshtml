@@ -1,0 +1,65 @@
+﻿@model Blogaat.Models.Domains.BlogPost
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            @if (Model != null)
+            {
+                <!-- Blog Heading -->
+                <div class="col-12 col-md-8 text-left">
+                    <h1 class="display-4 font-weight-bold">@Model.Heading</h1>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-secondary "><small class="text-red">@Model.Author</small> </span>
+                    <span class="text-secondary">@Model.PublishedDate.ToString("MMMM dd, yyyy")</span>
+                    </div>
+                </div>
+
+                <!-- Tags Section -->
+                <div class="col-12 col-md-8 text-left mb-4">
+                    <p>
+                        <strong>Tags:</strong>
+                        @if (Model.tags != null && Model.tags.Any())
+                        {
+                            foreach (var tag in Model.tags)
+                            {
+                                <span class="badge bg-primary text-white me-1">@tag.Name</span>
+                            }
+                        }
+                        else
+                        {
+                            <span class="text-muted">No tags available.</span>
+                        }
+                    </p>
+                </div>
+
+                <!-- Featured Image -->
+                <div class="col-12 col-md-8 text-center mb-4">
+                    <img src="@Model.FeateredImageUrl" alt="@Model.Heading" class="img-fluid rounded shadow-lg" style="max-height: 500px; object-fit: cover;">
+                </div>
+
+               
+
+                <!-- Blog Content -->
+                <div class="col-12 col-md-8 text-left ">
+                    <article class="content-body blog-details-content">
+                        <p class="lead text-justify">@Html.Raw(Model.Content)</p>
+                    </article>
+                </div>
+
+                <!-- Back to Home Button -->
+               
+            }
+            else
+            {
+                <p class="text-center text-danger">This Blog is Not Found</p>
+            }
+        </div>
+    </div>
+</div>
+<br />
+<div>
+ 

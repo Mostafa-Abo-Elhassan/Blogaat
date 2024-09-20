@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\workstation\\source\\repos\\Blogaat\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|c:\\users\\workstation\\source\\repos\\blogaat\\blogaat\\views\\adminblogposts\\getall.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|solutionrelative:blogaat\\views\\adminblogposts\\getall.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GetALL.cshtml",
+              "DocumentMoniker": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
+              "RelativeDocumentMoniker": "Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
+              "ToolTip": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
+              "RelativeToolTip": "Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAACsAAAB5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-20T13:16:52.189Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

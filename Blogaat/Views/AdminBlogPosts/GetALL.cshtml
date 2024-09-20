@@ -18,8 +18,9 @@
                         <th>ID</th>
                         <th>Heading</th>
                         <th>Tags</th>
-                        <th>  </th>
-                        <th>  </th>
+                        <th>Image  </th>
+                        <th> Edit </th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>@blogPost.Id</td>
                             <td>@blogPost.Heading</td>
+
                             <td>
                                 <div class="d-flex">
                                     @foreach (var tag in blogPost.tags)
@@ -38,6 +40,9 @@
                                     }
                                 </div>
                             </td>
+                            <th>
+                                <img src="@blogPost.FeateredImageUrl" class="img-thumbnail " style="width:64px; height:64px;" />
+                            </th>
                             <td>
                                 <button type="submit" class="btn btn-dark"
                                         asp-area="" asp-controller="AdminBlogPosts"

@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Blogaat.styles.css" asp-append-version="true" />
-    
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blogaat</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h3>Blogaat</h3></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -66,15 +66,15 @@
                                 </ul>
                             </li>
                         }
-                       
+
                     </ul>
-                     
-                    <div class="d-flex align-items-center" >
+
+                    <div class="d-flex align-items-center">
 
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <div class="m-3 text-light">
-                             Hello   @User?.Identity?.Name
+                                Hello   @User?.Identity?.Name
                             </div>
 
                             <a class="btn me-3 bg-light text-dark"
@@ -83,7 +83,8 @@
                                asp-action="Logout">
                                 Logout
                             </a>
-                        }else
+                        }
+                        else
                         {
                             <a class="btn me-3 bg-light text-dark"
                                asp-area=""
@@ -99,24 +100,25 @@
                             </a>
                         }
 
-                       
-                        
+
+
                     </div>
                 </div>
             </div>
         </nav>
-    </header>
-    <div >
+    </header><br />
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Blogaat - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted" style="background-color: black; color: white;">
+        <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
+            &copy; 2024 - Blogaat - <a asp-area="" asp-controller="Home" asp-action="Index" style="color: white;">Home</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
