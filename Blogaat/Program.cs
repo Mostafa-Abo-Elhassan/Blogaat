@@ -41,7 +41,7 @@ namespace Blogaat
             builder.Services.AddScoped<ITagRepository, TagRepository>();
             builder.Services.AddScoped<IuploadImage, uploadImage>();
             builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
-          
+            builder.Services.AddScoped<Iusers, UsersRepo>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

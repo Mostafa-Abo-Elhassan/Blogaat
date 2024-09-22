@@ -1,0 +1,134 @@
+﻿@model Blogaat.Models.ViewModels.usersVM
+
+<div class="container">
+
+    <h3 style="font-size:30px;" class="text-left">SHOW ALL Users</h3>
+</div>
+
+<!-- Button to trigger the modal -->
+
+<div class="container ">
+    <!-- Button to Trigger Modal -->
+    <div class="mb-3 d-flex justify-content-end">
+        <button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#createUserModal">
+            Create User
+        </button>
+    </div>
+
+
+
+
+
+    <div>
+        @if (Model != null )
+        {
+            <div class="container py-5">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+
+                            <th>User Name</th>
+
+                            <th>Email</th>
+
+                            <th>Role</th>
+
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+
+                                <td>@user.UserName</td>
+
+                                <td>@user.Email</td>
+
+                                <td>@user.RoleName</td>
+                                <td>
+                                    <form method="post" asp-action="Delete"
+                                    asp-controller="AdminUsers"
+                                          asp-route-Id="@user.Id">
+                                          <button class="btn btn-danger" type="submit">Delete</button>
+
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        }
+        else
+        {
+            <p>NO Users Found!</p>
+        }
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Bootstrap Modal for Creating New User -->
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createUserModalLabel">Create New User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="createUserModal">
+
+                <form method="post" asp-action="CreateUser" asp-controller="AdminUsers">
+                    <div class="form-group">
+                        <label asp-for="UserName">Username</label>
+                        <input type="text" class="form-control" asp-for="UserName" required />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email</label>
+                        <input type="email" class="form-control" asp-for="Email" required />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Password</label>
+                        <input type="password" class="form-control" asp-for="Password" required />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Role</label><br />
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="RoleUser" name="checkUser" value="User" checked>
+                            <label class="form-check-label" for="RoleUser">User</label>
+                        </div>
+                        @if (User.IsInRole("Super_Admin"))
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="RoleAdmin" asp-for="checkAdmin">
+                                <label class="form-check-label" for="RoleAdmin">Admin</label>
+                            </div>
+
+                        }
+                        
+                    </div>
+
+
+                    <button type="submit" class="btn btn-dark">Create User</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

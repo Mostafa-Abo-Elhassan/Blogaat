@@ -4,7 +4,7 @@
     ViewData["Title"] = "GetALL Tag";
 }
 
-<div>
+<div class ="container">
 
     <h3 style="font-size:30px;">SHOW ALL TAGS</h3>
 </div>
@@ -13,13 +13,13 @@
     {
         <div class="container py-5">
 
-            <table class="table">
+            <table class="table" >
                 <thad>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Display Name</th>
-                        <th>Photo</th>
+                     
                         <th>Editing </th>
                     </tr>
                 </thad>
@@ -30,7 +30,7 @@
                             <td>@tag.Id</td>
                             <td>@tag.Name</td>
                             <td>@tag.DisplayName</td>
-                          @*   <th><img src="~/Images/@tag.urlimage" /> </th> *@
+                            @*   <th><img src="~/Images/@tag.urlimage" /> </th> *@
                             <td>
                                 <button type="submit" class="btn btn-dark"
                                         asp-area="" asp-controller="AdminTags"
@@ -54,11 +54,6 @@
     {
         <p>NO Tags Found!</p>
     }
-    @* <style>
-    table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    }
-    </style> *@
+
 
 </div>

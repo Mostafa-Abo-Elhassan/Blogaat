@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
                 <h1 class="display-4">Welcome to Blogaat</h1>
-                <p class="lead">
+                <p class="lead text-left">
                     Blogaat is a vibrant platform for sharing insightful articles and creative ideas. It fosters a community where writers and readers can exchange knowledge and inspire one another. With a focus on engagement, it provides a welcoming space for diverse voices. Join us in exploring new perspectives and creative expressions!
 
 
@@ -39,7 +39,7 @@
 }
 
 
-<section class="bg-light py-5">
+<section class="bg-light py-5" >
     <div class="container">
         <!-- Section Heading -->
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -53,7 +53,7 @@
         @if (Model != null && Model.blog.Any())
         {
             <!-- Post Grid -->
-            <div class="row">
+            <div class="row" >
                 @foreach (var Blogaat in Model.blog)
                 {
                     <!-- Post Item -->
@@ -101,3 +101,4 @@
     </div>
 </section>
 
+ 

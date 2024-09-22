@@ -5,23 +5,24 @@ using System.Collections.Generic;
 
 namespace Blogaat.Data
 {
-    public class BlogaatDbcontext:DbContext
+    public class BlogaatDbcontext : DbContext
     {
-          // ctor
-            public BlogaatDbcontext() { }
-            public BlogaatDbcontext(DbContextOptions<BlogaatDbcontext> options) : base(options) { }
+        // ctor
+        public BlogaatDbcontext() { }
+        public BlogaatDbcontext(DbContextOptions<BlogaatDbcontext> options) : base(options) { }
 
 
-            public DbSet<BlogPost> BlogPosts { get; set; }
-           public DbSet<Tag> Tags { get; set; }
-
+        public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<BlogPostLike> Likes { get; set; }
+        public DbSet<BlogPostComment> comments { get; set; }
 
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                base.OnConfiguring(optionsBuilder);
-            }
+        {
+            base.OnConfiguring(optionsBuilder);
+        }
 
     }
 }

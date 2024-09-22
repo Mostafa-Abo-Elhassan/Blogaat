@@ -13,6 +13,7 @@
         public string Author { get; set; }
         public bool  Visible { get; set; }
         public ICollection<Tag> tags { get; set; }
-
+        public ICollection<BlogPostLike> likes { get; set; }
+        public ICollection<BlogPostComment> comments { get; set; }
     }
 }

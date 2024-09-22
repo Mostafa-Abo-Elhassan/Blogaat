@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Blogaat.Migrations.BlogaatDbcontextMigrations
+namespace Blogaat.Migrations
 {
     [DbContext(typeof(BlogaatDbcontext))]
     partial class BlogaatDbcontextModelSnapshot : ModelSnapshot
@@ -82,6 +82,51 @@ namespace Blogaat.Migrations.BlogaatDbcontextMigrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("Blogaat.Models.Domains.BlogPostComment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("comments");
+                });
+
+            modelBuilder.Entity("Blogaat.Models.Domains.BlogPostLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("Blogaat.Models.Domains.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -93,10 +138,6 @@ namespace Blogaat.Migrations.BlogaatDbcontextMigrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("urlimage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -118,6 +159,31 @@ namespace Blogaat.Migrations.BlogaatDbcontextMigrations
                         .HasForeignKey("tagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Blogaat.Models.Domains.BlogPostComment", b =>
+                {
+                    b.HasOne("Blogaat.Models.Domains.BlogPost", null)
+                        .WithMany("comments")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Blogaat.Models.Domains.BlogPostLike", b =>
+                {
+                    b.HasOne("Blogaat.Models.Domains.BlogPost", null)
+                        .WithMany("likes")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Blogaat.Models.Domains.BlogPost", b =>
+                {
+                    b.Navigation("comments");
+
+                    b.Navigation("likes");
                 });
 #pragma warning restore 612, 618
         }

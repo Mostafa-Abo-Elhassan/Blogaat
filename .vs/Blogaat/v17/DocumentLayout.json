@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\workstation\\source\\repos\\Blogaat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|c:\\users\\workstation\\source\\repos\\blogaat\\blogaat\\views\\adminblogposts\\getall.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|solutionrelative:blogaat\\views\\adminblogposts\\getall.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|c:\\users\\workstation\\source\\repos\\blogaat\\blogaat\\views\\adminusers\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|solutionrelative:blogaat\\views\\adminusers\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|c:\\users\\workstation\\source\\repos\\blogaat\\blogaat\\controllers\\adminuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|solutionrelative:blogaat\\controllers\\adminuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|c:\\users\\workstation\\source\\repos\\blogaat\\blogaat\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14428716-5039-45CE-90E4-1AADF073B5E6}|Blogaat\\Blogaat.csproj|solutionrelative:blogaat\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,15 +30,41 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Blogaat\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Blogaat\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-22T00:33:33.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminUsersController.cs",
+              "DocumentMoniker": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Controllers\\AdminUsersController.cs",
+              "RelativeDocumentMoniker": "Blogaat\\Controllers\\AdminUsersController.cs",
+              "ToolTip": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Controllers\\AdminUsersController.cs",
+              "RelativeToolTip": "Blogaat\\Controllers\\AdminUsersController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAAACgAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-22T00:02:24.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GetALL.cshtml",
-              "DocumentMoniker": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
-              "RelativeDocumentMoniker": "Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
-              "ToolTip": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
-              "RelativeToolTip": "Blogaat\\Views\\AdminBlogPosts\\GetALL.cshtml",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAACsAAAB5AAAA",
+              "Title": "Users.cshtml",
+              "DocumentMoniker": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Views\\AdminUsers\\Users.cshtml",
+              "RelativeDocumentMoniker": "Blogaat\\Views\\AdminUsers\\Users.cshtml",
+              "ToolTip": "C:\\Users\\workstation\\source\\repos\\Blogaat\\Blogaat\\Views\\AdminUsers\\Users.cshtml",
+              "RelativeToolTip": "Blogaat\\Views\\AdminUsers\\Users.cshtml",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAAAG4AAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-20T13:16:52.189Z",
+              "WhenOpened": "2024-09-21T23:55:11.86Z",
               "EditorCaption": ""
             }
           ]
