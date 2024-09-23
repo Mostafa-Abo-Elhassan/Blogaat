@@ -40,11 +40,40 @@ This project is a full-featured blog website built using ASP.NET MVC. The applic
     ```
 
 ### Screenshots
-<p align="center">
-  <img src="path_to_screenshot1.png" alt="Home Page" width="400px"/>
-  <img src="path_to_screenshot2.png" alt="User Profile" width="400px"/>
+<p align="center"> 1
+  <img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061016/kvypybfqobi4nxhxj5sy.png" alt="Home Page" width="700px"/>
 </p>
-
+<p align="center"> 2
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061123/dnbcqo57oaweggn9nx5p.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 3
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061391/mlnd35kbttrxlzhks9ls.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 4
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061123/dnbcqo57oaweggn9nx5p.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 5
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061490/ln6mg3oz4ucvcysfvkdd.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 6
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061552/hioghzzsgs0vprrugxse.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 7
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061599/e1gt135uzqnh0q44zs40.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 8
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061627/zkx6lesxat3nw4qbzajo.png" alt="User Profile" width="700px"/>
+</p>
+</p>
+<p align="center"> 9
+<img src="https://res.cloudinary.com/dfgunzope/image/upload/v1727061653/b3znxacrtzzorjwdptg4.png" alt="User Profile" width="700px"/>
+</p>
 ### Future Enhancements
 - Add a comment system for blog posts.
 - Improve search functionality for blog posts.
@@ -52,3 +81,23 @@ This project is a full-featured blog website built using ASP.NET MVC. The applic
 
 ### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Blogaat Project Features
+
+Blogaat is a simple blog platform built with ASP.NET MVC. The project supports user registration, viewing posts, and tagging. It also provides role-based access where:
+
+- **Admin** can manage blog posts, tags, and users.
+- **Super Admin** can manage blog posts, tags, admins, and users.
+
+### Technologies Used
+- C#, MVC, .NET 7
+- Dependency Injection
+- Froala Editor for rich text editing
+- Cloudinary for cloud-based image hosting
+- ASP.NET Identity for user management
+- HTML, CSS, Bootstrap
+
+### Project Link:
+[Blogaat on GitHub](https://bit.ly/3TFccYN)
