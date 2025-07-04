@@ -1,5 +1,5 @@
-using Blogaat.Repository.IRepository;
 using Blogaat.Models.ViewModels;
+using Blogaat.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 namespace Blogaat.Controllers
@@ -65,7 +65,7 @@ namespace Blogaat.Controllers
 
                     }
 
-                   identityResult = await _userManager.AddToRolesAsync(user, roles);
+                    identityResult = await _userManager.AddToRolesAsync(user, roles);
                     if (identityResult is not null && identityResult.Succeeded)
                     {
                         return RedirectToAction("Users", "AdminUsers");

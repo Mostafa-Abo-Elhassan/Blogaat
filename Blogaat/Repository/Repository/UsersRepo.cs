@@ -1,22 +1,22 @@
 ﻿using Blogaat.Data;
 using Blogaat.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blogaat.Repository.Repository
 {
     public class UsersRepo : Iusers
     {
-        private readonly BlogaatAuothanticatDbcintext blogaatAuothanticat;
+        private readonly BlogaatDbcontext dbcontext;
 
-        public UsersRepo(BlogaatAuothanticatDbcintext blogaatAuothanticat)
+        public UsersRepo(BlogaatDbcontext blogaatDbcontext)
         {
-            this.blogaatAuothanticat = blogaatAuothanticat;
+            blogaatDbcontext = dbcontext;
         }
         public async Task<IEnumerable<IdentityUser>> GetALLUsers()
         {
-            return await blogaatAuothanticat.Users.ToListAsync();
-           
+            //return await blogaatDbcontext.Users.ToListAsync();
+            return null; // يجب استبدال هذا بـ dbcontext.Users.ToListAsync() إذا كان لديك DbSet للمستخدمين في BlogaatDbcontext
+
 
         }
     }

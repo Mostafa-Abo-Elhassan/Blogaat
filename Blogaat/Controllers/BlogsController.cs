@@ -1,10 +1,9 @@
 ﻿using Blogaat.Repository.IRepository;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogaat.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class BlogsController : Controller
     {
         private readonly IBlogPostRepository blogPostRepository;
@@ -13,7 +12,7 @@ namespace Blogaat.Controllers
         {
             this.blogPostRepository = blogPostRepository;
         }
-        public async Task < IActionResult> Index(Guid id)
+        public async Task<IActionResult> Index(Guid id)
         {
             var blog = await blogPostRepository.GetAsync(id);
 

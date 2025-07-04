@@ -1,65 +1,71 @@
-﻿ @model Blogaat.Models.ViewModels.EditTagVM
+﻿@model Blogaat.Models.ViewModels.EditTagVM
 
 @{
     ViewData["Title"] = "Edit Tag";
+    Layout = "_Layout"; // Admin Layout
 }
-<div class="container">
 
-    <h3 style="font-size:30px;">Edit Tag</h3>
-</div>
-<div class="container py-5">
-    <div class="mb-3">
-        <button type="button" class="btn btn-dark">
-            <a asp-controller="AdminTags" asp-action="GetALL">Back</a>
-        </button>
+<div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow mt-8">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">✏️ Edit Tag</h2>
+        <a asp-controller="AdminTags" asp-action="GetALL"
+           class="text-sm text-blue-600 hover:underline">
+            ⬅ Back to Tags
+        </a>
     </div>
-</div>
-<div>
 
     @if (Model != null)
     {
-        <div class="container py-5">
+        <form method="post" asp-controller="AdminTags" asp-action="SaveEdit" class="space-y-4">
 
-            <form method="post" asp-controller="AdminTags" asp-action="SaveEdit">
+            <!-- ID (readonly) -->
+            <div>
+                <label for="id" class="block text-sm font-medium text-gray-700">ID</label>
+                <input type="text" id="id" asp-for="Id" readonly
+                       class="mt-1 block w-full rounded border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed" />
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="id">id:</label><br>
-                    <input class="form-control" type="text" id="id" class="form-control" asp-for="Id" readonly><br>
-                </div>
+            <!-- Name -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" asp-for="Name" required
+                       class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Name" class="text-red-500 text-sm"></span>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="name">Name:</label><br>
-                    <input class="form-control" type="text" id="name" required asp-for="Name" class="form-control">
-                    <br>
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
+            <!-- Display Name -->
+            <div>
+                <label for="displayName" class="block text-sm font-medium text-gray-700">Display Name</label>
+                <input type="text" id="displayName" asp-for="DisplayName" required
+                       class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="DisplayName" class="text-red-500 text-sm"></span>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="display name">Display Name:</label><br>
-                    <input class="form-control" type="text" id="display name" required asp-for="DisplayName" class="form-control">
-                    <span asp-validation-for="DisplayName" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <div class="d-flex">
-                        <button type="submit" class="btn btn-dark">Update</button>
-                        <button type="submit" class="btn btn-danger m-2"
-                                asp-area="" asp-action="Deletee"
-                                asp-controller="AdminTags">
-                            Delete
-                        </button>
+            <!-- Actions -->
+            <div class="flex gap-4 pt-4">
+                <button type="submit"
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    💾 Update
+                </button>
 
-                    </div>
-                </div>
-            </form>
-
-        </div>
+                <button type="submit"
+                        asp-action="Deletee" asp-controller="AdminTags"
+                        class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+                    🗑 Delete
+                </button>
+            </div>
+        </form>
     }
     else
     {
-        <p>This Tag is not found</p>
+        <div class="text-red-600 font-semibold">
+            ❌ This tag was not found.
+        </div>
     }
+</div>
 
+@section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
+}

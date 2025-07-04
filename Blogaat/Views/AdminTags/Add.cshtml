@@ -2,26 +2,38 @@
 
 @{
     ViewData["Title"] = "Add Tag";
+    Layout = "_Layout"; // تأكد أن "_Layout" هو الـ admin layout اللي فيه الـ sidebar
 }
-<div class="container py-5">
 
-    <form method="post" asp-controller="AdminTags" asp-action="SaveAdd">
+<div class="max-w-xl mx-auto bg-white p-6 rounded shadow mt-6">
 
-        <div class="mb-3">
-            <label class="form-label" for="name">Name:</label><br>
-            <input class="form-control" type="text" id="name" asp-for="Name"><br>
-            <span asp-validation-for="Name" class="text-danger"></span>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">➕ Add New Tag</h2>
+
+    <form method="post" asp-controller="AdminTags" asp-action="SaveAdd" class="space-y-4">
+
+        <!-- Name Field -->
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="name" asp-for="Name"
+                   class="mt-1 block w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+            <span asp-validation-for="Name" class="text-red-500 text-sm"></span>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label" for="display name">Display Name:</label><br>
-            <input class="form-control" type="text" id="display name" asp-for="DisplayName"><br><br>
-            <span asp-validation-for="DisplayName" class="text-danger"></span>
+        <!-- Display Name Field -->
+        <div>
+            <label for="displayName" class="block text-sm font-medium text-gray-700">Display Name</label>
+            <input type="text" id="displayName" asp-for="DisplayName"
+                   class="mt-1 block w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+            <span asp-validation-for="DisplayName" class="text-red-500 text-sm"></span>
         </div>
 
-
-        <div class="mb-3">
-            <button type="submit" class="btn btn-dark">submit</button>
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+            <button type="submit"
+                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+                Submit
+            </button>
         </div>
+
     </form>
 </div>

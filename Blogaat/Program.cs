@@ -18,16 +18,16 @@ namespace Blogaat
 
             builder.Services.AddDbContext<BlogaatDbcontext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("BlogaatConnectionStrings")));
-            
 
-            builder.Services.AddDbContext<BlogaatAuothanticatDbcintext>(options =>
-           options.UseSqlServer(builder.Configuration.GetConnectionString("BlogaatAuothanticat")));
+
+            //// builder.Services.AddDbContext<BlogaatAuothanticatDbcintext>(options =>
+            ////options.UseSqlServer(builder.Configuration.GetConnectionString("BlogaatAuothanticat")));
 
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
-       .AddEntityFrameworkStores<BlogaatAuothanticatDbcintext>();
+       .AddEntityFrameworkStores<BlogaatDbcontext>();
 
 
             builder.Services.Configure<IdentityOptions>(options =>
@@ -35,9 +35,9 @@ namespace Blogaat
                 options.Password.RequireDigit = true;
 
 
-            } );
+            });
 
-           
+
             builder.Services.AddScoped<ITagRepository, TagRepository>();
             builder.Services.AddScoped<IuploadImage, uploadImage>();
             builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();

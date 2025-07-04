@@ -1,14 +1,11 @@
-﻿using Blogaat.Data;
-using Blogaat.Models.Domains;
+﻿using Blogaat.Models.Domains;
 using Blogaat.Models.ViewModels;
 using Blogaat.Repository.IRepository;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blogaat.Controllers
 {
-    [Authorize(Roles = "Admin,Super_Admin")]
+    //[Authorize(Roles = "Admin,Super_Admin")]
     public class AdminTagsController : Controller
     {
         private readonly ITagRepository tagRepository;

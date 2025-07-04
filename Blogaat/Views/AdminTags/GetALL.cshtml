@@ -1,59 +1,55 @@
 ﻿@model List<Blogaat.Models.Domains.Tag>
 
 @{
-    ViewData["Title"] = "GetALL Tag";
+    ViewData["Title"] = "Show All Tags";
+    Layout = "_Layout"; // تأكد أنه هو Admin Layout
 }
 
-<div class ="container">
+<div class="p-6 bg-white rounded shadow max-w-6xl mx-auto mt-6">
 
-    <h3 style="font-size:30px;">SHOW ALL TAGS</h3>
-</div>
-<div>
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">🏷️ All Tags</h2>
+        <a asp-controller="AdminTags" asp-action="Add"
+           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm">
+            ➕ Add New Tag
+        </a>
+    </div>
+
     @if (Model != null && Model.Any())
     {
-        <div class="container py-5">
-
-            <table class="table" >
-                <thad>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto border border-gray-200 divide-y divide-gray-200">
+                <thead class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Display Name</th>
-                     
-                        <th>Editing </th>
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Display Name</th>
+                        <th class="px-4 py-2">Action</th>
                     </tr>
-                </thad>
-                <tbody>
+                </thead>
+                <tbody class="text-sm divide-y divide-gray-100">
                     @foreach (var tag in Model)
                     {
-                        <tr>
-                            <td>@tag.Id</td>
-                            <td>@tag.Name</td>
-                            <td>@tag.DisplayName</td>
-                            @*   <th><img src="~/Images/@tag.urlimage" /> </th> *@
-                            <td>
-                                <button type="submit" class="btn btn-dark"
-                                        asp-area="" asp-controller="AdminTags"
-                                        asp-action="Edit" asp-route-id="@tag.Id">
-                                    <a asp-area="" asp-controller="AdminTags"
-                                       asp-action="Edit" asp-route-id="@tag.Id">
-                                        Edit
-                                    </a>
-                                </button>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-2">@tag.Id</td>
+                            <td class="px-4 py-2">@tag.Name</td>
+                            <td class="px-4 py-2">@tag.DisplayName</td>
+                            <td class="px-4 py-2">
+                                <a asp-controller="AdminTags" asp-action="Edit" asp-route-id="@tag.Id"
+                                   class="text-white bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded text-sm transition">
+                                    ✏️ Edit
+                                </a>
                             </td>
-
-
                         </tr>
                     }
                 </tbody>
             </table>
-
         </div>
     }
     else
     {
-        <p>NO Tags Found!</p>
+        <div class="text-red-600 text-center font-medium py-4">
+            🚫 No Tags Found!
+        </div>
     }
-
-
 </div>

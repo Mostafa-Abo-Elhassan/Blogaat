@@ -1,0 +1,46 @@
+## Ignore build output
+bin/
+obj/
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Visual Studio
+.vs/
+
+## Database files
+*.mdf
+*.ldf
+
+## Logs
+*.log
+
+## Secrets
+appsettings.Development.json
+secrets.json
+
+## Publish outputs
+publish/
+
+## Backup & temp files
+*.bak
+*.tmp
+*.swp
+
+## Others
+_ReSharper*/
+*.ncrunch*
+*.VisualState.xml
+TestResult*/
+build/
+packages/
+.idea/
+.vscode/
+
+## Node (if using npm or frontend)
+node_modules/
+dist/

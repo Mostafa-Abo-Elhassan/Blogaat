@@ -1,7 +1,6 @@
 ﻿using Blogaat.Models;
 using Blogaat.Models.ViewModels;
 using Blogaat.Repository.IRepository;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -34,7 +33,7 @@ namespace Blogaat.Controllers
             return View(model);
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Privacy()
         {
             return View();

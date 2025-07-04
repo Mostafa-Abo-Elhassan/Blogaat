@@ -1,94 +1,78 @@
 ﻿@model Blogaat.Models.ViewModels.HomeTagsVM
-  @{
- ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Home";
 }
-   
 
 <!-- Hero Section -->
-<!-- Hero Section -->
-<section class="hero-section bg-light py-5 my-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
-                <h1 class="display-4">Welcome to Blogaat</h1>
-                <p class="lead text-left">
-                    Blogaat is a vibrant platform for sharing insightful articles and creative ideas. It fosters a community where writers and readers can exchange knowledge and inspire one another. With a focus on engagement, it provides a welcoming space for diverse voices. Join us in exploring new perspectives and creative expressions!
-
-
-
-                </p>
-                
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <img src="https://images.pexels.com/photos/3194523/pexels-photo-3194523.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Blog Image" class="img-fluid rounded">
-            </div>
+<section class="bg-white py-16">
+    <div class="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mt-8 md:mt-0 text-center md:text-left">
+            <h1 class="text-4xl font-extrabold text-gray-800 mb-4">Welcome to Blogaat</h1>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                Blogaat is a vibrant platform for sharing insightful articles and creative ideas. It fosters a community where writers and readers can exchange knowledge and inspire one another. With a focus on engagement, it provides a welcoming space for diverse voices.
+            </p>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+            <img src="https://images.pexels.com/photos/3194523/pexels-photo-3194523.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Blog Image" class="rounded-lg shadow-md w-full max-w-sm">
         </div>
     </div>
 </section>
- @if (Model != null && Model.tag.Any())
-{
-    <p class="container">
-        @foreach (var tag in Model.tag)
-        {
-            <span class="badge bg-secondary me-1 text-center">
-                @tag.Name
-            </span>
-        }
-    </p>
 
+<!-- Tags Section -->
+@if (Model?.tag != null && Model.tag.Any())
+{
+    <section class="container mx-auto px-4 py-4">
+        <div class="flex flex-wrap gap-2">
+            @foreach (var tag in Model.tag)
+            {
+                <span class="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">@tag.Name</span>
+            }
+        </div>
+    </section>
 }
 
-
-<section class="bg-light py-5" >
-    <div class="container">
-        <!-- Section Heading -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="text-dark fw-bold">Recent Posts</h1>
-
+<!-- Recent Posts Section -->
+<section class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+        <!-- Heading -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Recent Posts</h2>
         </div>
 
-        <!-- Section Divider -->
-        <hr class="my-4">
+        <!-- Divider -->
+        <div class="border-b border-gray-300 mb-8"></div>
 
-        @if (Model != null && Model.blog.Any())
+        <!-- Posts -->
+        @if (Model?.blog != null && Model.blog.Any())
         {
-            <!-- Post Grid -->
-            <div class="row" >
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach (var Blogaat in Model.blog)
                 {
-                    <!-- Post Item -->
-                    <div class="col-md-4 mb-4 p-3">
-                        <div class="card h-100">
-                            <img src=@Blogaat.FeateredImageUrl alt="@Blogaat.Heading" class="img-fluid mb-4">
-                            <div class="card-body">
-
-                                @* <span class="badge bg-primary mb-2">@Blogaat.tags</span> *@
-                                <h5 class="card-title">@Blogaat.PageTitle</h5>
-                                <p>
-                                    <div>
-                                        <small class="text-muted">Author : <small class="text-red">@Blogaat.Author</small></small><br>
-                                        <small class="text-muted">Published Date : @Blogaat.PublishedDate.ToString("MMMM dd, yyyy")</small>
-                                    </div>
-                                </p>
-                                <p>
-                                    @foreach (var tag in Blogaat.tags)
-                                    {
-                                        <span class="badge bg-secondary me-1">
-                                            @tag.Name
-                                        </span>
-                                    }
-                                </p>
-                                <p class="card-text">@Blogaat.ShortDescription</p>
+                    <div class="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col">
+                        <img src="@Blogaat.FeateredImageUrl" alt="@Blogaat.Heading" class="w-full h-48 object-cover">
+                        <div class="p-5 flex-1 flex flex-col">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">@Blogaat.PageTitle</h3>
+                            <div class="text-sm text-gray-500 mb-2">
+                                <div>Author: <span class="text-blue-600">@Blogaat.Author</span></div>
+                                <div>Published: @Blogaat.PublishedDate.ToString("MMMM dd, yyyy")</div>
                             </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-
-                                <a class="btn btn-dark"
-                                   asp-area="" asp-action="Index"
-                                   asp-controller="Blogs"
-                                   asp-route-Id="@Blogaat.Id">
-                                    Read More
-                                </a>
+                            <div class="flex flex-wrap gap-2 my-2">
+                                @foreach (var tag in Blogaat.tags)
+                                {
+                                    <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">@tag.Name</span>
+                                }
                             </div>
+                            <p class="text-gray-600 text-sm flex-1">@Blogaat.ShortDescription</p>
+                        </div>
+                        <div class="p-5 border-t border-gray-200">
+                            <a class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition text-sm"
+                               asp-area=""
+                               asp-action="Index"
+                               asp-controller="Blogs"
+                               asp-route-Id="@Blogaat.Id">
+                                Read More
+                            </a>
                         </div>
                     </div>
                 }
@@ -96,9 +80,32 @@
         }
         else
         {
-            <p>No recent posts available.</p>
+            <p class="text-gray-500">No recent posts available.</p>
         }
-    </div>
-</section>
 
- 
+
+
+    </div>
+
+</section>
+<div class="w-full bg-white dark:bg-gray-800">
+    <div class="container flex flex-col items-center px-6 py-5 mx-auto space-y-6 sm:flex-row sm:justify-between sm:space-y-0 ">
+        <div class="-mx-2">
+            <a href="#" class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-300 transform bg-gray-100 rounded-lg dark:text-white dark:bg-gray-700">
+                1
+            </a>
+
+            <a href="#" class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                2
+            </a>
+
+            <a href="#" class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                3
+            </a>
+        </div>
+
+        <div class="text-gray-500 dark:text-gray-400">
+            <span class="font-medium text-gray-700 dark:text-gray-100">1 - 25</span> of 77 records
+        </div>
+    </div>
+</div>

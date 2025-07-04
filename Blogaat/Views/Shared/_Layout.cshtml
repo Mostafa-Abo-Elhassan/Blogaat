@@ -1,137 +1,113 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager;
+@inject SignInManager<IdentityUser> SignInManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Blogaat</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Blogaat Admin</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Blogaat.styles.css" asp-append-version="true" />
-
-
 </head>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<body class="bg-gray-100 min-h-screen flex font-sans">
 
-<!-- Bootstrap CSS (لو مش محطوطة بالفعل) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Sidebar -->
+    <aside id="sidebar"
+           class="w-64 bg-white min-h-screen fixed top-0 left-0 transform -translate-x-full transition-transform duration-300 z-50 md:relative md:translate-x-0 md:block shadow-lg border-r border-gray-200">
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h3>Blogaat</h3></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Admin
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" asp-area=""
-                                           asp-action="Add" asp-controller="AdminTags">
-                                            Add Tag
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-area=""
-                                           asp-action="GetALL" asp-controller="AdminTags">
-                                            Show All Tags
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-area=""
-                                           asp-action="Add" asp-controller="AdminBlogPosts">
-                                            Add Blog Post
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-area=""
-                                           asp-action="GetALL" asp-controller="AdminBlogPosts">
-                                            Show All Blogs
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-area=""
-                                           asp-action="Users" asp-controller="AdminUsers">
-                                            Get All Users
-                                        </a>
-                                    </li>
-                                    <li>
-                                </ul>
-                            </li>
-                        }
+        <div class="p-6 border-b">
+            <a asp-controller="Home" asp-action="Index" class="text-2xl font-extrabold text-gray-900">
+                Blogaat Admin
+            </a>
+        </div>
 
-                    </ul>
-
-                    <div class="d-flex align-items-center">
-
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <div class="m-3 text-light">
-                                Hello   @User?.Identity?.Name
-                            </div>
-
-                            <a class="btn me-3 bg-light text-dark"
-                               asp-area=""
-                               asp-controller="Account"
-                               asp-action="Logout">
-                                Logout
-                            </a>
-                        }
-                        else
-                        {
-                            <a class="btn me-3 bg-light text-dark"
-                               asp-area=""
-                               asp-controller="Account"
-                               asp-action="login">
-                                Login
-                            </a>
-                            <a class="btn me-3 bg-light text-dark"
-                               asp-area=""
-                               asp-controller="Account"
-                               asp-action="register">
-                                Register
-                            </a>
-                        }
-
-
-
-                    </div>
-                </div>
-            </div>
+        <nav class="flex flex-col px-6 py-4 space-y-2 text-sm text-gray-700">
+            <a asp-controller="Home" asp-action="Index" class="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded">
+                <i class="fas fa-home text-gray-500"></i> Home
+            </a>
+            <a asp-controller="AdminTags" asp-action="Add" class="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded">
+                <i class="fas fa-plus-circle text-gray-500"></i> Add Tag
+            </a>
+            <a asp-controller="AdminTags" asp-action="GetALL" class="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded">
+                <i class="fas fa-tags text-gray-500"></i> Show Tags
+            </a>
+            <a asp-controller="AdminBlogPosts" asp-action="Add" class="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded">
+                <i class="fas fa-pen text-gray-500"></i> Add Blog
+            </a>
+            <a asp-controller="AdminBlogPosts" asp-action="GetALL" class="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded">
+                <i class="fas fa-file-alt text-gray-500"></i> Show Blogs
+            </a>
+            <a asp-controller="AdminUsers" asp-action="Users" class="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded">
+                <i class="fas fa-users text-gray-500"></i> Users
+            </a>
         </nav>
-    </header><br />
-    <div>
-        <main role="main" class="pb-3">
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col w-full">
+
+        <!-- Top Navbar -->
+        <header class="bg-white shadow px-6 py-4 flex justify-between items-center border-b">
+            <!-- Sidebar Toggle Button -->
+            <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none text-xl">
+                ☰
+            </button>
+
+@*             <h1 class="text-xl font-semibold text-gray-800">@ViewData["Title"]</h1>
+
+            <div class="flex items-center gap-4">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <span class="text-sm text-gray-700">Hello, <strong>@User.Identity.Name</strong></span>
+                    <a asp-controller="Account" asp-action="Logout"
+                       class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm transition">
+                        Logout
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login"
+                       class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm transition">
+                        Login
+                    </a>
+                    <a asp-controller="Account" asp-action="Register"
+                       class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-sm transition">
+                        Register
+                    </a>
+                }
+            </div> *@
+        </header>
+
+        <!-- Body -->
+        <main class="p-6">
             @RenderBody()
         </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 text-gray-600 text-center text-sm py-4 border-t">
+            &copy; 2024 - Blogaat Admin - <a asp-controller="Home" asp-action="Index" class="text-blue-500 hover:underline">Home</a>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted" style="background-color: black; color: white;">
-        <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
-            &copy; 2024 - Blogaat - <a asp-area="" asp-controller="Home" asp-action="Index" style="color: white;">Home</a>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        const toggleButton = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleButton?.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    </script>
+
 </body>
 </html>

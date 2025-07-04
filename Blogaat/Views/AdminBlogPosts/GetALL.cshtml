@@ -1,76 +1,62 @@
 ﻿@model List<Blogaat.Models.Domains.BlogPost>
 @{
     ViewData["Title"] = "Get ALL Blogs";
+    Layout = "_Layout"; // تأكد إنه Admin Layout بـ Tailwind
 }
 
-<div class="container">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-    <h3 style="font-size:30px;">SHOW ALL Blogs</h3>
-</div>
-<div>
+    <h1 class="text-2xl font-bold mb-6">All Blog Posts</h1>
+
     @if (Model != null && Model.Any())
     {
-        <div class="container py-5" class="table">
-
-            <table class="table">
-                <thead>
+        <div class="overflow-x-auto bg-white rounded shadow">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <thead class="bg-gray-100 text-left text-gray-600 uppercase tracking-wider">
                     <tr>
-                        <th>ID</th>
-                        <th>Heading</th>
-                        <th>Tags</th>
-                        <th>Image  </th>
-                        <th> Edit </th>
-                        
+                        <th class="px-4 py-3">ID</th>
+                        <th class="px-4 py-3">Heading</th>
+                        <th class="px-4 py-3">Tags</th>
+                        <th class="px-4 py-3">Image</th>
+                        <th class="px-4 py-3 text-center">Edit</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-gray-200 text-gray-800">
                     @foreach (var blogPost in Model)
                     {
                         <tr>
-                            <td>@blogPost.Id</td>
-                            <td>@blogPost.Heading</td>
+                            <td class="px-4 py-3">@blogPost.Id</td>
+                            <td class="px-4 py-3">@blogPost.Heading</td>
 
-                            <td>
-                                <div class="d-flex">
+                            <td class="px-4 py-3">
+                                <div class="flex flex-wrap gap-1">
                                     @foreach (var tag in blogPost.tags)
                                     {
-                                        <span class="badge bg-secondary me-1">
-                                            @tag.Name
-                                        </span>
+                                        <span class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">@tag.Name</span>
                                     }
                                 </div>
                             </td>
-                            <th>
-                                <img src="@blogPost.FeateredImageUrl" class="img-thumbnail " style="width:64px; height:64px;" />
-                            </th>
-                            <td>
-                                <button type="submit" class="btn btn-dark"
-                                        asp-area="" asp-controller="AdminBlogPosts"
-                                        asp-action="Edit" asp-route-id="@blogPost.Id">
-                                    <a asp-area="" asp-controller="AdminBlogPosts"
-                                       asp-action="Edit" asp-route-id="@blogPost.Id">
-                                        Edit
-                                    </a>
-                                </button>
+
+                            <td class="px-4 py-3">
+                                <img src="@blogPost.FeateredImageUrl" alt="Image" class="w-16 h-16 object-cover rounded shadow" />
                             </td>
 
-
+                            <td class="px-4 py-3 text-center">
+                                <a asp-controller="AdminBlogPosts" asp-action="Edit" asp-route-id="@blogPost.Id"
+                                   class="inline-block bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-800 transition">
+                                    Edit
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
-
         </div>
     }
     else
     {
-        <p>NO Tags Found!</p>
+        <div class="text-center text-gray-500 mt-10">
+            <p>No blog posts found.</p>
+        </div>
     }
-    @* <style>
-    table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    }
-    </style> *@
-
 </div>

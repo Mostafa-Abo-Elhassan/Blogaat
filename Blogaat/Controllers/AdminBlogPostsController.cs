@@ -1,17 +1,11 @@
-﻿using Blogaat.Models.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Blogaat.Models.Domains;
-using Microsoft.AspNetCore.Components.Web;
-using Azure;
+﻿using Blogaat.Models.Domains;
+using Blogaat.Models.ViewModels;
 using Blogaat.Repository.IRepository;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.AspNetCore.Authorization;
-using Blogaat.Repository.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Blogaat.Controllers
 {
-    [Authorize(Roles = "Admin,Super_Admin")]
+    //[Authorize(Roles = "Admin,Super_Admin")]
     public class AdminBlogPostsController : Controller
     {
         private readonly ITagRepository tagRepository;
@@ -41,55 +35,55 @@ namespace Blogaat.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveAdd(AddBlogPostVM addBlogPostVM )
+        public async Task<IActionResult> SaveAdd(AddBlogPostVM addBlogPostVM)
         {
 
-           
-            
-                
 
-                var blogpost = new BlogPost
+
+
+
+            var blogpost = new BlogPost
+            {
+                Heading = addBlogPostVM.Heading,
+                PageTitle = addBlogPostVM.PageTitle,
+                Content = addBlogPostVM.Content,
+                ShortDescription = addBlogPostVM.ShortDescription,
+                FeateredImageUrl = addBlogPostVM.FeateredImageUrl,// path image in db
+                UrlHandle = addBlogPostVM.UrlHandle,
+                PublishedDate = addBlogPostVM.PublishedDate,
+                Author = addBlogPostVM.Author,
+                Visible = addBlogPostVM.Visible,
+
+            };
+
+
+
+            var selectedtags = new List<Tag>();
+            foreach (var selectedtagID in addBlogPostVM.SelectedTags)
+            {
+                var selectedtagIDguid = Guid.Parse(selectedtagID);
+                var exist = await tagRepository.GetAsync(selectedtagIDguid);
+
+                if (exist != null)
                 {
-                    Heading = addBlogPostVM.Heading,
-                    PageTitle = addBlogPostVM.PageTitle,
-                    Content = addBlogPostVM.Content,
-                    ShortDescription = addBlogPostVM.ShortDescription,
-                    FeateredImageUrl = addBlogPostVM.FeateredImageUrl,// path image in db
-                    UrlHandle = addBlogPostVM.UrlHandle,
-                    PublishedDate = addBlogPostVM.PublishedDate,
-                    Author = addBlogPostVM.Author,
-                    Visible = addBlogPostVM.Visible,
-
-                };
-               
-                
-
-                var selectedtags = new List<Tag>();
-                foreach (var selectedtagID in addBlogPostVM.SelectedTags)
-                {
-                    var selectedtagIDguid = Guid.Parse(selectedtagID);
-                    var exist = await tagRepository.GetAsync(selectedtagIDguid);
-
-                    if (exist != null)
-                    {
-                        selectedtags.Add(exist);
-
-                    }
-
-                }
-               
-                if (blogpost != null)
-                {
-                    blogpost.tags = selectedtags;
-                   
-
-                    
-                    await blogPostRepository.AddAsync(blogpost);
-                    return RedirectToAction("GetALL");
+                    selectedtags.Add(exist);
 
                 }
 
-            
+            }
+
+            if (blogpost != null)
+            {
+                blogpost.tags = selectedtags;
+
+
+
+                await blogPostRepository.AddAsync(blogpost);
+                return RedirectToAction("GetALL");
+
+            }
+
+
 
 
             return RedirectToAction("Add");
