@@ -20,18 +20,50 @@ namespace Blogaat.Controllers
             this.tagRepository = tagRepository;
         }
 
-        public async Task<IActionResult> Index(HomeTagsVM homeTagsVM)
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var Bblog = await blogPostRepository.GetALLAsync();
-            var Ttag = await tagRepository.GetALLAsync();
+            int pageSize = 3;
+
+            var allBlogs = await blogPostRepository.GetALLAsync();
+            var tags = await tagRepository.GetALLAsync();
+
+            var paginatedBlogs = allBlogs
+                                 .OrderByDescending(b => b.PublishedDate)
+                                 .Skip((page - 1) * pageSize)
+                                 .Take(pageSize)
+                                 .ToList();
+
+            var totalBlogs = allBlogs.Count();
+            ViewBag.TotalPages = (int)Math.Ceiling(totalBlogs / (double)pageSize);
+            ViewBag.CurrentPage = page;
 
             var model = new HomeTagsVM
             {
-                blog = Bblog,
-                tag = Ttag
+                blog = paginatedBlogs,
+                tag = tags
             };
+
             return View(model);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> LoadMorePosts(int page = 1)
+        //{
+        //    int pageSize = 2;
+
+        //    var allBlogs = await blogPostRepository.GetALLAsync();
+        //    var paginatedBlogs = allBlogs
+        //        .OrderByDescending(b => b.PublishedDate)
+        //        .Skip((page - 1) * pageSize)
+        //        .Take(pageSize)
+        //        .ToList();
+
+        //    // نرجّع Partial View أو Json
+        //    return PartialView("_BlogPostCard", paginatedBlogs);
+        //}
+
+
+
 
         //[Authorize]
         public IActionResult Privacy()
@@ -44,5 +76,13 @@ namespace Blogaat.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
+
+
+
     }
+
+
 }

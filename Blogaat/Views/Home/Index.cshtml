@@ -5,16 +5,17 @@
 }
 
 <!-- Hero Section -->
-<section class="bg-white py-16">
+<section class="bg-white dark:bg-gray-900 py-16">
     <div class="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center justify-between">
         <div class="md:w-1/2 mt-8 md:mt-0 text-center md:text-left">
-            <h1 class="text-4xl font-extrabold text-gray-800 mb-4">Welcome to Blogaat</h1>
-            <p class="text-gray-600 text-lg leading-relaxed">
-                Blogaat is a vibrant platform for sharing insightful articles and creative ideas. It fosters a community where writers and readers can exchange knowledge and inspire one another. With a focus on engagement, it provides a welcoming space for diverse voices.
+            <h1 class="text-4xl font-extrabold text-gray-800 dark:text-white mb-4">Welcome to Blogaat</h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                Blogaat is a vibrant platform for sharing insightful articles and creative ideas. It fosters a community where writers and readers can exchange knowledge and inspire one another.
             </p>
         </div>
         <div class="md:w-1/2 flex justify-center">
-            <img src="https://images.pexels.com/photos/3194523/pexels-photo-3194523.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Blog Image" class="rounded-lg shadow-md w-full max-w-sm">
+            <img src="https://images.pexels.com/photos/3194523/pexels-photo-3194523.jpeg?auto=compress&cs=tinysrgb&w=400"
+                 alt="Blog Image" class="rounded-lg shadow-md w-full max-w-sm">
         </div>
     </div>
 </section>
@@ -26,46 +27,43 @@
         <div class="flex flex-wrap gap-2">
             @foreach (var tag in Model.tag)
             {
-                <span class="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">@tag.Name</span>
+                <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white text-sm px-3 py-1 rounded-full">@tag.Name</span>
             }
         </div>
     </section>
 }
 
 <!-- Recent Posts Section -->
-<section class="bg-gray-100 py-16">
+<section class="bg-gray-100 dark:bg-gray-800 py-16">
     <div class="container mx-auto px-4">
-        <!-- Heading -->
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-800">Recent Posts</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Recent Posts</h2>
         </div>
 
-        <!-- Divider -->
-        <div class="border-b border-gray-300 mb-8"></div>
+        <div class="border-b border-gray-300 dark:border-gray-700 mb-8"></div>
 
-        <!-- Posts -->
         @if (Model?.blog != null && Model.blog.Any())
         {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach (var Blogaat in Model.blog)
                 {
-                    <div class="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col">
+                    <div class="bg-white dark:bg-gray-900 rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col">
                         <img src="@Blogaat.FeateredImageUrl" alt="@Blogaat.Heading" class="w-full h-48 object-cover">
                         <div class="p-5 flex-1 flex flex-col">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">@Blogaat.PageTitle</h3>
-                            <div class="text-sm text-gray-500 mb-2">
-                                <div>Author: <span class="text-blue-600">@Blogaat.Author</span></div>
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">@Blogaat.PageTitle</h3>
+                            <div class="text-sm text-gray-500 dark:text-gray-300 mb-2">
+                                <div>Author: <span class="text-blue-600 dark:text-blue-400">@Blogaat.Author</span></div>
                                 <div>Published: @Blogaat.PublishedDate.ToString("MMMM dd, yyyy")</div>
                             </div>
                             <div class="flex flex-wrap gap-2 my-2">
                                 @foreach (var tag in Blogaat.tags)
                                 {
-                                    <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">@tag.Name</span>
+                                    <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white text-xs px-2 py-1 rounded-full">@tag.Name</span>
                                 }
                             </div>
-                            <p class="text-gray-600 text-sm flex-1">@Blogaat.ShortDescription</p>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm flex-1">@Blogaat.ShortDescription</p>
                         </div>
-                        <div class="p-5 border-t border-gray-200">
+                        <div class="p-5 border-t border-gray-200 dark:border-gray-700">
                             <a class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition text-sm"
                                asp-area=""
                                asp-action="Index"
@@ -80,32 +78,67 @@
         }
         else
         {
-            <p class="text-gray-500">No recent posts available.</p>
+            <p class="text-gray-500 dark:text-gray-300">No recent posts available.</p>
         }
-
-
-
     </div>
-
 </section>
-<div class="w-full bg-white dark:bg-gray-800">
-    <div class="container flex flex-col items-center px-6 py-5 mx-auto space-y-6 sm:flex-row sm:justify-between sm:space-y-0 ">
-        <div class="-mx-2">
-            <a href="#" class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-300 transform bg-gray-100 rounded-lg dark:text-white dark:bg-gray-700">
-                1
+<!-- Pagination -->
+<div class="flex justify-center mt-8 space-x-2">
+    @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
+    {
+        if (i == (int)ViewBag.CurrentPage)
+        {
+            <span class="px-3 py-1 rounded
+                         bg-blue-600 text-white
+                         dark:bg-blue-500 dark:text-white
+                         font-semibold shadow">
+                @i
+            </span>
+        }
+        else
+        {
+            <a asp-action="Index" asp-route-page="@i"
+               class="px-3 py-1 rounded
+                      bg-gray-200 text-gray-800
+                      hover:bg-gray-300
+                      dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600
+                      transition duration-150 ease-in-out">
+                @i
             </a>
-
-            <a href="#" class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                2
-            </a>
-
-            <a href="#" class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                3
-            </a>
-        </div>
-
-        <div class="text-gray-500 dark:text-gray-400">
-            <span class="font-medium text-gray-700 dark:text-gray-100">1 - 25</span> of 77 records
-        </div>
-    </div>
+        }
+    }
 </div>
+
+
+
+
+
+@* 
+
+<div id="post-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    @Html.Partial("_BlogPostCard", Model.blog)
+</div>
+
+<div class="flex justify-center mt-8">
+    <button id="loadMoreBtn" data-page="2" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition">
+        Load More
+    </button>
+</div>
+
+
+<script>
+    document.getElementById("loadMoreBtn").addEventListener("click", function () {
+        var button = this;
+        var page = parseInt(button.getAttribute("data-page"));
+
+        fetch(`/Home/LoadMorePosts?page=${page}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("post-container").insertAdjacentHTML('beforeend', data);
+                button.setAttribute("data-page", page + 1);
+
+                // Optional: لو خلصت البوستات خفي الزرار
+                // if (data.trim() === "") button.style.display = 'none';
+            });
+    });
+</script> *@

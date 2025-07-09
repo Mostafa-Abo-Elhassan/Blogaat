@@ -1,78 +1,90 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    bool IsActive(string action, string controller) => currentAction == action && currentController == controller;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewBag.Title - Blogaat</title>
-
-    <!-- Tailwind CSS CDN -->
+    <link rel="icon" type="image/png" href="~/35.jpg" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+
+    <script>
+        // On load, apply saved theme from localStorage
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle("dark");
+            const isDark = html.classList.contains("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+        }
+    </script>
 </head>
-<body class="bg-gray-100 text-gray-800">
+
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans">
 
     <!-- Navbar -->
-    <header class="bg-white shadow">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="@Url.Action("Index", "Home")" class="text-2xl font-bold text-blue-600">Blogaat</a>
+    <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="@Url.Action("Index", "Home")" class="text-2xl font-bold text-blue-600 dark:text-blue-400">Blogaat</a>
 
-            <nav class="space-x-4">
-                <a href="@Url.Action("Index", "Home")" class="text-gray-700 hover:text-blue-600">Home</a>
+            <div class="flex items-center gap-6">
+                <nav class="hidden md:flex gap-6">
+                    <a href="@Url.Action("Index", "Home")"
+                       class="text-sm font-medium transition @((IsActive("Index", "Home") ? "text-blue-600 dark:text-blue-400 underline underline-offset-4" : "text-gray-800 dark:text-gray-100 hover:text-blue-600"))">
+                        Home
+                    </a>
+                    <a href="@Url.Action("About", "Home")"
+                       class="text-sm font-medium transition @((IsActive("About", "Home") ? "text-blue-600 dark:text-blue-400 underline underline-offset-4" : "text-gray-800 dark:text-gray-100 hover:text-blue-600"))">
+                        About
+                    </a>
+                    <a href="@Url.Action("Contact", "Home")"
+                       class="text-sm font-medium transition @((IsActive("Contact", "Home") ? "text-blue-600 dark:text-blue-400 underline underline-offset-4" : "text-gray-800 dark:text-gray-100 hover:text-blue-600"))">
+                        Contact
+                    </a>
+                </nav>
 
-
-
-                <a href="@Url.Action("About", "Home")" class="text-gray-700 hover:text-blue-600">About</a>
-
-                <a href="@Url.Action("Contact", "Home")" class="text-gray-700 hover:text-blue-600">Contact</a>
-
-@* 
-                <a href="@Url.Action("Login", "Account")" class="text-gray-700 hover:text-blue-600">Login</a>
-                <a href="@Url.Action("Register", "Account")" class="text-gray-700 hover:text-blue-600">Register</a> *@
-
-            </nav>
+                <!-- Toggle Button -->
+                <button onclick="toggleDarkMode()" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-3 py-1 rounded-md text-sm hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    Dark Mode
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Page Content -->
-    <main class="container mx-auto px-4 py-8">
+    <!-- Main -->
+    <main class="max-w-5xl mx-auto px-4 py-8">
         @RenderBody()
     </main>
 
-    <!-- Optional Scripts -->
     @RenderSection("Scripts", required: false)
-</body>
 
-
-<footer class="bg-white dark:bg-gray-900">
-    <div class="container flex flex-col items-center justify-between px-6 py-8 mx-auto lg:flex-row">
-        <a href="@Url.Action("Index", "Home")" class="text-2xl font-bold text-blue-600">Blogaat</a>
-
-
-        <div class="flex flex-wrap items-center justify-center gap-4 mt-6 lg:gap-6 lg:mt-0">
-            <a href="#" class="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-                Overview
-            </a>
-
-            <a href="#" class="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-                Features
-            </a>
-
-            <a href="#" class="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-                Pricing
-            </a>
-            <a href="#" class="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-                Careers
-            </a>
-
-            <a href="#" class="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-                Help
-            </a>
-
-            <a href="#" class="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-                Privacy
-            </a>
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t dark:border-gray-700 mt-10">
+        <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <a href="@Url.Action("Index", "Home")" class="text-xl font-bold text-blue-600 dark:text-blue-400">Blogaat</a>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">© @DateTime.Now.Year Blogaat. All rights reserved.</p>
+            </div>
+            <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-300">
+                <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400">Privacy</a>
+                <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400">Help</a>
+                <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400">Terms</a>
+            </div>
         </div>
+    </footer>
 
-        <p class="mt-6 text-sm text-gray-500 lg:mt-0 dark:text-gray-400">© Copyright Blogaat. </p>
-    </div>
-</footer>
+</body>
 </html>

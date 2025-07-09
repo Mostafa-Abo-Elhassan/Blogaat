@@ -1,17 +1,24 @@
-﻿namespace Blogaat.Models.Domains
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Blogaat.Models.Domains
 {
     public class BlogPost
     {
         public Guid Id { get; set; }
-        public string  Heading { get; set; }
+        [MaxLength(70)]
+        public string Heading { get; set; }
+        [MaxLength(70)]
         public string PageTitle { get; set; }
         public string Content { get; set; }
+
+
+        [MaxLength(70)]
         public string ShortDescription { get; set; }
         public string FeateredImageUrl { get; set; }
         public string UrlHandle { get; set; }
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
-        public bool  Visible { get; set; }
+        public bool Visible { get; set; }
         public ICollection<Tag> tags { get; set; }
         public ICollection<BlogPostLike> likes { get; set; }
         public ICollection<BlogPostComment> comments { get; set; }
