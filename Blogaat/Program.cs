@@ -32,7 +32,7 @@ namespace Blogaat
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = true;
+                options.Password.RequireDigit = false;
 
 
             });

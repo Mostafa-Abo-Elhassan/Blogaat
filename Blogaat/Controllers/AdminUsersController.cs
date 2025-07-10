@@ -1,9 +1,12 @@
 using Blogaat.Models.ViewModels;
 using Blogaat.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 namespace Blogaat.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class AdminUsersController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -22,11 +25,15 @@ namespace Blogaat.Controllers
         {
             var users = await iusers.GetALLUsers(); // استرجاع جميع المستخدمين
             var usersVM = new usersVM(); // إنشاء كائن usersVM
+                                         //foreach (var user in users)
+                                         //{
+                                         //var roles = await _userManager.GetRolesAsync(user);
+
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                var roleName = roles.FirstOrDefault() ?? "No Role"; // التعامل مع حالة عدم وجود دور
-                // إضافة بيانات المستخدم إلى قائمة Users
+                var roleName = roles.Any() ? string.Join(", ", roles) : "No Role"; // التعامل مع حالة عدم وجود دور  
+                                                                                   // إضافة بيانات المستخدم إلى قائمة Users  
                 usersVM.Users.Add(new USERS
                 {
                     Id = Guid.Parse(user.Id),
@@ -35,6 +42,16 @@ namespace Blogaat.Controllers
                     RoleName = roleName
                 });
             }
+            //var roleName = roles.All() ?? "No Role"; // التعامل مع حالة عدم وجود دور
+            //// إضافة بيانات المستخدم إلى قائمة Users
+            //usersVM.Users.Add(new USERS
+            //{
+            //    Id = Guid.Parse(user.Id),
+            //    UserName = user.UserName,
+            //    Email = user.Email,
+            //    RoleName = roleName
+            //});
+            //}
             return View(usersVM); // إرجاع الـ View مع البيانات
         }
 

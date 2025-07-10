@@ -1,9 +1,10 @@
 ﻿using Blogaat.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogaat.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class BlogsController : Controller
     {
         private readonly IBlogPostRepository blogPostRepository;

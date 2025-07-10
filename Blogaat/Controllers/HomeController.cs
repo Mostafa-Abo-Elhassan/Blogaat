@@ -22,7 +22,7 @@ namespace Blogaat.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 3;
+            int pageSize = 6;
 
             var allBlogs = await blogPostRepository.GetALLAsync();
             var tags = await tagRepository.GetALLAsync();
